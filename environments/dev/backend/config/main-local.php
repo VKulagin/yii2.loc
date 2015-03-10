@@ -12,8 +12,9 @@ $config = [
             'showScriptName' => false,
 //            'enableStrictParsing' => true,
             'rules' => [
-                '' => 'site/index',
-                '<action>' => 'site/<action>',
+                '' => 'page/index',
+                '<controller>' => '<controller>/index',
+                '<controller>/<action>/<id:\d+>' => '<controller>/<action>',
                 // ...
             ],
         ],

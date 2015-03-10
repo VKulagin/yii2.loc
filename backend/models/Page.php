@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "page".
@@ -14,7 +15,7 @@ use Yii;
  * @property string $pageCreationTime
  * @property string $pageUpdateTime
  */
-class Page extends \yii\db\ActiveRecord
+class Page extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -32,7 +33,6 @@ class Page extends \yii\db\ActiveRecord
         return [
             [['pageName', 'pageAlias', 'pageContent'], 'required'],
             [['pageContent'], 'string'],
-            [['pageCreationTime', 'pageUpdateTime'], 'integer'],
             [['pageName', 'pageAlias'], 'string', 'max' => 128]
         ];
     }
@@ -50,5 +50,11 @@ class Page extends \yii\db\ActiveRecord
             'pageCreationTime' => 'Страница создана',
             'pageUpdateTime' => 'Страница изменена',
         ];
+    }
+
+    public function beforeSave($insert){
+        if($insert) $this->pageCreationTime = time();
+        $this->pageUpdateTime = time();
+        return parent::beforeSave($insert);
     }
 }

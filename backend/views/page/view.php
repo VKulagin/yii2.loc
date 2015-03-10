@@ -4,11 +4,12 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Page */
+/* @var $model backend\models\Page */
 
 $this->title = $model->pageID;
 $this->params['breadcrumbs'][] = ['label' => 'Pages', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+Yii::$app->formatter->timeZone='Europe/Kiev';
 ?>
 <div class="page-view">
 
@@ -32,8 +33,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'pageName',
             'pageAlias',
             'pageContent:ntext',
-            'pageCreationTime',
-            'pageUpdateTime',
+            [
+                'attribute' => 'pageUpdateTime',
+                //'format' => ['raw', 'Y-m-d H:i:s'],
+                'format' =>  ['datetime', 'php:d.m.Y H:i:s'],
+                'options' => ['width' => '150']
+            ],
+            [
+                'attribute' => 'pageCreationTime',
+                //'format' => ['raw', 'Y-m-d H:i:s'],
+                'format' =>  ['datetime', 'php:d.m.Y H:i:s'],
+                'options' => ['width' => '150']
+            ],
         ],
     ]) ?>
 

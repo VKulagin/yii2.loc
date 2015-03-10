@@ -1,14 +1,14 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Page;
+use backend\models\Page;
 
 /**
- * PageSearch represents the model behind the search form about `app\models\Page`.
+ * PageSearch represents the model behind the search form about `backend\models\Page`.
  */
 class PageSearch extends Page
 {
@@ -18,8 +18,8 @@ class PageSearch extends Page
     public function rules()
     {
         return [
-            [['pageID', 'pageCreationTime', 'pageUpdateTime'], 'integer'],
-            [['pageName', 'pageAlias', 'pageContent'], 'safe'],
+            [['pageID'], 'integer'],
+            [['pageName', 'pageAlias', 'pageContent', 'pageUpdateTime', 'pageCreationTime'], 'safe'],
         ];
     }
 
@@ -57,8 +57,8 @@ class PageSearch extends Page
 
         $query->andFilterWhere([
             'pageID' => $this->pageID,
-            'pageCreationTime' => $this->pageCreationTime,
             'pageUpdateTime' => $this->pageUpdateTime,
+            'pageCreationTime' => $this->pageCreationTime,
         ]);
 
         $query->andFilterWhere(['like', 'pageName', $this->pageName])
